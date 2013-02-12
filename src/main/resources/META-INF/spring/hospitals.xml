@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:c="http://www.springframework.org/schema/c"
+  xmlns:util="http://www.springframework.org/schema/util"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+	<description>Example configuration to get you started.</description>
+
+	<context:component-scan base-package="com.acme.organbay" />
+
+    <bean id="budapestAddress" class="com.acme.organbay.Address" c:city="Budapest" c:country="Hungary" c:zip="a" c:street="a" />
+    <bean id="szentImreAddress" c:zip="1111" c:street="Budafoki ut 34" parent="budapestAddress"  />
+    <bean id="uzsokiAddress" c:zip="1068" c:street="Uzsoki u 55" parent="budapestAddress" />
+          
+    <bean class="com.acme.organbay.Hospital" 
+          c:name="Szent Imre Korhaz" c:address-ref="szentImreAddress">
+          <property name="organs">
+            <util:list>
+              <bean c:name="liver" c:price="10000" c:owner="Feri" class="com.acme.organbay.Organ" />
+              <bean c:name="brain" c:price="20000" c:owner="Gyuri" class="com.acme.organbay.Organ" />
+              <bean c:name="heart" c:price="30000" c:owner="Viktor" class="com.acme.organbay.Organ" />
+            </util:list>
+          </property>
+    </bean>
+    
+        <bean class="com.acme.organbay.Hospital" 
+          c:name="Uzsoki" c:address="1111, Budapest, Futo utca 47.">
+          <property name="organs">
+            <util:list>
+              <bean c:name="liver" c:price="10000" c:owner="Feri" class="com.acme.organbay.Organ" />
+              <bean c:name="brain" c:price="20000" c:owner="Gyuri" class="com.acme.organbay.Organ" />
+              <bean c:name="heart" c:price="30000" c:owner="Viktor" class="com.acme.organbay.Organ" />
+            </util:list>
+          </property>
+    </bean>
+    
+</beans>
